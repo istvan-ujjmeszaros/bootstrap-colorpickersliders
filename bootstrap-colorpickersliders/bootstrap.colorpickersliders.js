@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v1.0.0
+ *  v1.0.1
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -265,9 +265,11 @@
             function hidePopover() {
                 triggerelement.popover('destroy');
 
-                // can not use hidden.bs.popover because it is triggered before animation ends (probably an issue in bs 3.0.3)
+                // can not use hidden.bs.popover event because it is triggered before animation ends (probably an issue in bs 3.0.3)
                 setTimeout(function(){
-                    popover_container.remove();
+                    if (popover_container instanceof jQuery) {
+                        popover_container.remove();
+                    }
                 }, 150);
             }
 
