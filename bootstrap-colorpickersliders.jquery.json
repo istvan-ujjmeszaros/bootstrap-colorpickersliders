@@ -1,0 +1,33 @@
+{
+    "name": "bootstrap-colorpickersliders",
+    "title": "Bootstrap Color Picker Sliders",
+    "description": "A Bootstrap 3 optimized advanced responsive color selector with color swatches and support for human perceived lightness. Works in all modern browsers and on touch devices.",
+    "keywords": [
+        "colorpicker",
+        "bootstrap",
+        "input",
+        "responsive",
+        "color",
+        "picker",
+        "widget",
+        "colorchooser"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "István Ujj-Mészáros",
+        "url": "https://github.com/istvan-ujjmeszaros"
+    },
+    "licenses": [
+        {
+            "type": "Apache License v2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+    ],
+    "homepage": "http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
+    "demo": "http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
+    "docs": "http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
+    "download": "https://github.com/istvan-ujjmeszaros/bootstrap-colorpickersliders/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
