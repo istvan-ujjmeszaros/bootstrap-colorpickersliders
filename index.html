@@ -43,7 +43,38 @@
 
             <h2>Examples</h2>
 
-            <h3>Different sizes and color sliders</h3>
+            <h3>HSL sliders with customizable color swatches (flat rendering)</h3>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="hslflat"></div>
+                </div>
+
+                <div class="col-md-6">
+<pre class="prettyprint">
+&lt;div id=&quot;hslflat&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+    $(&quot;#hslflat&quot;).ColorPickerSliders({
+        flat: true,
+        order: {
+            hsl: 1
+        }
+    });
+&lt;/script&gt;
+</pre>
+                    <script>
+                        $("#hslflat").ColorPickerSliders({
+                            flat: true,
+                            order: {
+                                hsl: 1
+                            }
+                        });
+                    </script>
+
+                </div>
+            </div>
+
+            <h3>Different sizes and color sliders (in bootstrap popovers)</h3>
 
             <div class="row">
                 <div class="col-md-4">
@@ -222,6 +253,9 @@
             </div>
 
             <h3>Full featured flat rendering</h3>
+
+            <p>This example shows the CIE Lch sliders which is designed to approximate human vision. It means that yellow and blue with the same CIE lightness are identical to humans (which is not the case with HSL where blue seems to be much darker than yellow with the same HSL lightness).</p>
+            <p>CIE Lch is a special color model where not all colors are reproducible in the physical world, so this plugin just lowers the chroma of these colors to be convertible to RGB. You can read more about it on <a href="http://en.wikipedia.org/wiki/Lab_color_space#Advantages" target="_blank">Wikipedia</a>.</p>
 
             <div class="row">
                 <div class="col-md-6">
