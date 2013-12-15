@@ -55,18 +55,24 @@
 &lt;div id=&quot;hslflat&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
     $(&quot;#hslflat&quot;).ColorPickerSliders({
+        color: &quot;rgb(36, 170, 242)&quot;,
         flat: true,
         order: {
-            hsl: 1
+            hsl: 1,
+            cie: 2,
+            preview: 3
         }
     });
 &lt;/script&gt;
 </pre>
                     <script>
                         $("#hslflat").ColorPickerSliders({
+                            color: "rgb(36, 170, 242)",
                             flat: true,
                             order: {
-                                hsl: 1
+                                hsl: 1,
+                                cie: 2,
+                                preview: 3
                             }
                         });
                     </script>
