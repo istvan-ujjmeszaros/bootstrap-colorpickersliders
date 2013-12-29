@@ -247,7 +247,7 @@
 
                                 body.css("background-color", color.tiny.toRgbString());
 
-                                if (color.cielch.l < 60) {
+                                if (typeof color.cielch !== "undefined" && color.cielch.l < 60) {
                                     body.css("color", "white");
                                 }
                                 else {
