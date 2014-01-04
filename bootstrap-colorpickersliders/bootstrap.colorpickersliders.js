@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v1.1.0
+ *  v1.1.1
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -198,14 +198,21 @@
                 var updatedcolor = tinycolor(newcolor);
 
                 if (updatedcolor.format) {
-                    container.removeClass("cp-unconvertible-cie-color");
-
                     color.tiny = updatedcolor;
                     color.hsla = updatedcolor.toHsl();
                     color.rgba = updatedcolor.toRgb();
                     color.cielch = $.fn.ColorPickerSliders.rgb2lch(color.rgba);
 
-                    _updateAllElements(disableinputupdate);
+                    if (visible) {
+                        container.removeClass("cp-unconvertible-cie-color");
+                        _updateAllElements(disableinputupdate);
+                    }
+                    else {
+                        if (!disableinputupdate) {
+                            _updateConnectedInput();
+                        }
+                        _updateTriggerelementColor();
+                    }
 
                     return true;
                 }
