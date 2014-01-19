@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v1.1.1
+ *  v1.1.2
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -905,6 +905,8 @@
             function _updateAllElements(disableinputupdate) {
                 clearTimeout(updateAllElementsTimeout);
 
+                Date.now = Date.now || function() { return +new Date; };
+
                 if (Date.now() - lastUpdateTime < settings.updateinterval) {
                     _updateAllElementsTimer(disableinputupdate);
                     return;
@@ -1160,18 +1162,23 @@
     $.fn.ColorPickerSliders.gradientSupported = function() {
         var testelement = document.createElement('detectGradientSupport').style;
 
-        testelement.backgroundImage = "linear-gradient(left top, #9f9, white)";
-        testelement.backgroundImage = "-o-linear-gradient(left top, #9f9, white)";
-        testelement.backgroundImage = "-moz-linear-gradient(left top, #9f9, white)";
-        testelement.backgroundImage = "-webkit-linear-gradient(left top, #9f9, white)";
-        testelement.backgroundImage = "-ms-linear-gradient(left top, #9f9, white)";
-        testelement.backgroundImage = "-webkit-gradient(linear, left top, right bottom, from(#9f9), to(white))";
+        try {
+            testelement.backgroundImage = "linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-o-linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-moz-linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-webkit-linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-ms-linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-webkit-gradient(linear, left top, right bottom, from(#9f9), to(white))";
 
-        if (testelement.backgroundImage.indexOf("gradient") === -1) {
-            return false;
+            if (testelement.backgroundImage.indexOf("gradient") === -1) {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
-        else {
-            return true;
+        catch (err) {
+            return false;
         }
     };
 
