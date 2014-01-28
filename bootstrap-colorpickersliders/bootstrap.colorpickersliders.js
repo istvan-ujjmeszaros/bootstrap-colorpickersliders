@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v1.1.2
+ *  v1.1.3
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -203,7 +203,7 @@
                     color.rgba = updatedcolor.toRgb();
                     color.cielch = $.fn.ColorPickerSliders.rgb2lch(color.rgba);
 
-                    if (visible) {
+                    if (settings.flat || visible) {
                         container.removeClass("cp-unconvertible-cie-color");
                         _updateAllElements(disableinputupdate);
                     }
@@ -459,6 +459,7 @@
                 elements.swatches.on("touchstart mousedown click", "li span", function(ev) {
                     var color = $(this).css("background-color");
                     updateColor(color);
+                    //_updateAllElements();
                     ev.preventDefault();
                 });
 

@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v1.1.2
+ *  v1.1.3
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -188,7 +188,7 @@
                     color.hsla = updatedcolor.toHsl();
                     color.rgba = updatedcolor.toRgb();
 
-                    if (visible) {
+                    if (settings.flat || visible) {
                         container.removeClass("cp-unconvertible-cie-color");
                         _updateAllElements(disableinputupdate);
                     }
