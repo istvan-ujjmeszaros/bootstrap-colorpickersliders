@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v1.1.3
+ *  v2.0.0
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -47,6 +47,7 @@
                     elements,
                     connectedinput = false,
                     swatches,
+                    rendermode = false,
                     visible = false,
                     dragTarget = false,
                     lastUpdateTime = 0,
@@ -120,7 +121,7 @@
                 }, options.labels);
 
                 // force preview when browser doesn't support css gradients
-                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !$.fn.ColorPickerSliders.gradientSupported()) {
+                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !$.fn.ColorPickerSliders.gradientSupported() && !$.fn.ColorPickerSliders.svgSupported()) {
                     settings.order.preview = 10;
                 }
             }
@@ -131,6 +132,13 @@
                 }
 
                 alreadyinitialized = true;
+
+                if ($.fn.ColorPickerSliders.gradientSupported()) {
+                    rendermode = "css";
+                }
+                else if ($.fn.ColorPickerSliders.svgSupported()) {
+                    rendermode = "svg";
+                }
 
                 _initSettings();
                 _initConnectedElements();
@@ -888,43 +896,43 @@
             }
 
             function _renderHue() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.hue, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "h", 0, 360, 7));
+                setGradient(elements.sliders.hue, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "h", 0, 360, 7));
 
                 elements.sliders.hue_marker.css("left", color.hsla.h / 360 * 100 + "%");
             }
 
             function _renderSaturation() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.saturation, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "s", 0, 1, 2));
+                setGradient(elements.sliders.saturation, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "s", 0, 1, 2));
 
                 elements.sliders.saturation_marker.css("left", color.hsla.s * 100 + "%");
             }
 
             function _renderLightness() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.lightness, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "l", 0, 1, 3));
+                setGradient(elements.sliders.lightness, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "l", 0, 1, 3));
 
                 elements.sliders.lightness_marker.css("left", color.hsla.l * 100 + "%");
             }
 
             function _renderOpacity() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.opacity, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "a", 0, 1, 2));
+                setGradient(elements.sliders.opacity, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, "a", 0, 1, 2));
 
                 elements.sliders.opacity_marker.css("left", color.hsla.a * 100 + "%");
             }
 
             function _renderRed() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.red, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "r", 0, 255, 2));
+                setGradient(elements.sliders.red, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "r", 0, 255, 2));
 
                 elements.sliders.red_marker.css("left", color.rgba.r / 255 * 100 + "%");
             }
 
             function _renderGreen() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.green, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "g", 0, 255, 2));
+                setGradient(elements.sliders.green, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "g", 0, 255, 2));
 
                 elements.sliders.green_marker.css("left", color.rgba.g / 255 * 100 + "%");
             }
 
             function _renderBlue() {
-                $.fn.ColorPickerSliders.setGradient(elements.sliders.blue, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "b", 0, 255, 2));
+                setGradient(elements.sliders.blue, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, "b", 0, 255, 2));
 
                 elements.sliders.blue_marker.css("left", color.rgba.b / 255 * 100 + "%");
             }
@@ -950,6 +958,19 @@
 
                 elements.sliders.preview.val(colorstring);
             }
+
+            function setGradient(element, gradientstops) {
+                gradientstops.sort(function(a, b) {
+                    return a.position - b.position;
+                });
+
+                if (rendermode === "css") {
+                    $.fn.ColorPickerSliders.renderCSS(element, gradientstops);
+                }
+                else if (rendermode === "svg") {
+                    $.fn.ColorPickerSliders.renderSVG(element, gradientstops);
+                }
+            };
 
         });
 
@@ -1055,17 +1076,12 @@
         return gradientStops;
     };
 
-    $.fn.ColorPickerSliders.setGradient = function(element, gradientstops) {
-        gradientstops.sort(function(a, b) {
-            return a.position - b.position;
-        });
-
+    $.fn.ColorPickerSliders.renderCSS = function(element, gradientstops) {
         var gradientstring = "",
                 oldwebkitgradientstring = "",
                 noprefix = "linear-gradient(to right",
                 webkit = "-webkit-linear-gradient(left",
                 oldwebkit = "-webkit-gradient(linear, left top, right top";
-
 
         for (var i = 0; i < gradientstops.length; i++) {
             var el = gradientstops[i];
@@ -1081,9 +1097,66 @@
         webkit += gradientstring;
         noprefix += gradientstring;
 
-        element.css("background", oldwebkit);
-        element.css("background", webkit);
-        element.css("background", noprefix);
+        element.css("background-image", oldwebkit);
+        element.css("background-image", webkit);
+        element.css("background-image", noprefix);
+    };
+
+    $.fn.ColorPickerSliders.renderSVG = function(element, gradientstops) {
+        var svg = "",
+            svgstoppoints = "";
+
+        for (var i = 0; i < gradientstops.length; i++) {
+            var el = gradientstops[i],
+                svgcolor = tinycolor(el.color);
+
+            svgstoppoints += '<stop ' + 'stop-color="' + svgcolor.toHexString() + '" stop-opacity="' + svgcolor.toRgb().a + '"' + ' offset="' + el.position/100 + '"/>';
+        }
+
+        svg = '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="vsgg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="0">';
+        svg += svgstoppoints;
+        svg += '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#vsgg)" /></svg>';
+        svg = "url(data:image/svg+xml;base64," + $.fn.ColorPickerSliders.base64encode(svg) + ")";
+
+        element.css("background-image", svg);
+    };
+
+    $.fn.ColorPickerSliders.svgSupported = function() {
+        return !! document.createElementNS && !! document.createElementNS('http://www.w3.org/2000/svg','svg').createSVGRect;
+    };
+
+    /* source: http://phpjs.org/functions/base64_encode/ */
+    $.fn.ColorPickerSliders.base64encode = function(data) {
+        var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+            ac = 0,
+            enc = "",
+            tmp_arr = [];
+
+        if (!data) {
+            return data;
+        }
+
+        do {
+            o1 = data.charCodeAt(i++);
+            o2 = data.charCodeAt(i++);
+            o3 = data.charCodeAt(i++);
+
+            bits = o1 << 16 | o2 << 8 | o3;
+
+            h1 = bits >> 18 & 0x3f;
+            h2 = bits >> 12 & 0x3f;
+            h3 = bits >> 6 & 0x3f;
+            h4 = bits & 0x3f;
+
+            tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
+        } while (i < data.length);
+
+        enc = tmp_arr.join('');
+
+        var r = data.length % 3;
+
+        return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
     };
 
     $.fn.ColorPickerSliders.modifyColor = function(color, property, value) {
