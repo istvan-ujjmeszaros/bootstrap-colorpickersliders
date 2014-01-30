@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.0.0
+ *  v2.1.0
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
