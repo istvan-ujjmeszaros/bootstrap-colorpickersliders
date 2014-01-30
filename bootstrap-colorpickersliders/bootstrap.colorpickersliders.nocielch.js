@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.0
+ *  v2.1.1
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -120,11 +120,6 @@
                     opacity: 'Opacity',
                     preview: 'Preview'
                 }, options.labels);
-
-                // force preview when browser doesn't support css gradients
-                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !$.fn.ColorPickerSliders.gradientSupported() && !$.fn.ColorPickerSliders.svgSupported()) {
-                    settings.order.preview = 10;
-                }
             }
 
             function init() {
@@ -139,6 +134,11 @@
                 }
                 else if ($.fn.ColorPickerSliders.svgSupported()) {
                     rendermode = "svg";
+                }
+
+                // force preview when browser doesn't support css gradients
+                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !rendermode) {
+                    settings.order.preview = 10;
                 }
 
                 _initSettings();
@@ -1114,9 +1114,9 @@
         webkit += gradientstring;
         noprefix += gradientstring;
 
-        element.css("background-image", oldwebkit);
-        element.css("background-image", webkit);
         element.css("background-image", noprefix);
+        element.css("background-image", webkit);
+        element.css("background-image", oldwebkit);
     };
 
     $.fn.ColorPickerSliders.renderSVG = function(element, gradientstops) {

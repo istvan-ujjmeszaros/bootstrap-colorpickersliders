@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.1.0
+ *  v2.1.1
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -133,11 +133,6 @@
                     opacity: 'Opacity',
                     preview: 'Preview'
                 }, options.labels);
-
-                // force preview when browser doesn't support css gradients
-                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !$.fn.ColorPickerSliders.gradientSupported() && !$.fn.ColorPickerSliders.svgSupported()) {
-                    settings.order.preview = 10;
-                }
             }
 
             function init() {
@@ -152,6 +147,11 @@
                 }
                 else if ($.fn.ColorPickerSliders.svgSupported()) {
                     rendermode = "svg";
+                }
+
+                // force preview when browser doesn't support css gradients
+                if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !rendermode) {
+                    settings.order.preview = 10;
                 }
 
                 _initSettings();
@@ -1202,7 +1202,7 @@
         var testelement = document.createElement('detectGradientSupport').style;
 
         try {
-            testelement.backgroundImage = "linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "linear-gradient(to top left, #9f9, white)";
             testelement.backgroundImage = "-o-linear-gradient(left top, #9f9, white)";
             testelement.backgroundImage = "-moz-linear-gradient(left top, #9f9, white)";
             testelement.backgroundImage = "-webkit-linear-gradient(left top, #9f9, white)";
@@ -1266,7 +1266,6 @@
 
     $.fn.ColorPickerSliders.renderCSS = function(element, gradientstops) {
         var gradientstring = "",
-                oldwebkitgradientstring = "",
                 noprefix = "linear-gradient(to right",
                 webkit = "-webkit-linear-gradient(left",
                 oldwebkit = "-webkit-gradient(linear, left top, right top";
@@ -1275,19 +1274,18 @@
             var el = gradientstops[i];
 
             gradientstring += "," + el.color + " " + el.position + "%";
-            oldwebkitgradientstring += ",color-stop(" + el.position + "%," + el.color + ")";
+            oldwebkit += ",color-stop(" + el.position + "%," + el.color + ")";
         }
 
         gradientstring += ")";
-        oldwebkitgradientstring += ")";
+        oldwebkit += ")";
 
-        oldwebkit += oldwebkitgradientstring;
         webkit += gradientstring;
         noprefix += gradientstring;
 
-        element.css("background-image", oldwebkit);
-        element.css("background-image", webkit);
         element.css("background-image", noprefix);
+        element.css("background-image", webkit);
+        element.css("background-image", oldwebkit);
     };
 
     $.fn.ColorPickerSliders.renderSVG = function(element, gradientstops) {
