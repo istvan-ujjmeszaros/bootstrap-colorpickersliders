@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.1.1
+ *  v2.1.2
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -149,12 +149,13 @@
                     rendermode = "svg";
                 }
 
+                _initSettings();
+
                 // force preview when browser doesn't support css gradients
                 if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !rendermode) {
                     settings.order.preview = 10;
                 }
 
-                _initSettings();
                 _initConnectedElements();
                 _initColor();
                 _initConnectedinput();

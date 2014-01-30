@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.1
+ *  v2.1.2
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -136,12 +136,13 @@
                     rendermode = "svg";
                 }
 
+                _initSettings();
+
                 // force preview when browser doesn't support css gradients
                 if ((!settings.order.hasOwnProperty('preview') || settings.order.preview === false) && !rendermode) {
                     settings.order.preview = 10;
                 }
 
-                _initSettings();
                 _initConnectedElements();
                 _initColor();
                 _initConnectedinput();
