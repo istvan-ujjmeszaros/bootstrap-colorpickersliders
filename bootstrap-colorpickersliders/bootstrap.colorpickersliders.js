@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.0.0
+ *  v2.1.0
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -75,6 +75,7 @@
                     animation: true,
                     placement: 'auto',
                     trigger: 'focus',   // focus | manual
+                    preventtouchkeyboardonshow: true,   // makes the input readonly and needs a second click to be editable
                     title: '',
                     swatches: ['FFFFFF', 'C0C0C0', '808080', '000000', 'FF0000', '800000', 'FFFF00', '808000', '00FF00', '008000', '00FFFF', '008080', '0000FF', '000080', 'FF00FF', '800080'], // array or false to disable swatches
                     customswatches: 'colorpickkersliders', // false or a grop name
@@ -233,11 +234,12 @@
                 if (visible) {
                     return;
                 }
-                else {
-                    visible = true;
-                }
 
                 showPopover();
+
+                setTimeout(function(){
+                    visible = true;
+                },200);
             }
 
             function hide() {
@@ -419,6 +421,17 @@
                         triggerelement.attr("tabindex", -1);
                     }
 
+                    if (settings.preventtouchkeyboardonshow) {
+                        $(triggerelement).prop("readonly", true);
+
+                        $(triggerelement).on("click", function(ev) {
+                            if (visible) {
+                                $(triggerelement).prop("readonly", false);
+                                ev.stopPropagation();
+                            }
+                        });
+                    }
+
                     // buttons doesn't get focus in webkit browsers
                     // https://bugs.webkit.org/show_bug.cgi?id=22261
                     // and only input and button are focusable on iPad
@@ -439,6 +452,10 @@
 
                     $(triggerelement).on("blur", function(ev) {
                         hide();
+
+                        if (settings.preventtouchkeyboardonshow) {
+                            $(triggerelement).prop("readonly", true);
+                        }
 
                         ev.stopPropagation();
                     });
