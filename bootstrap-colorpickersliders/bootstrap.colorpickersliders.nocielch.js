@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.2
+ *  v2.1.3
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -878,6 +878,8 @@
                 _findActualColorsSwatch();
 
                 settings.onchange(container, color);
+
+                triggerelement.data("color", color);
             }
 
             function _updateTriggerelementColor() {

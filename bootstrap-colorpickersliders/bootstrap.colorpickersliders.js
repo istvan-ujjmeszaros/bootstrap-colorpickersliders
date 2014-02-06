@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.1.2
+ *  v2.1.3
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -986,6 +986,8 @@
                 _findActualColorsSwatch();
 
                 settings.onchange(container, color);
+
+                triggerelement.data("color", color);
             }
 
             function _updateTriggerelementColor() {
