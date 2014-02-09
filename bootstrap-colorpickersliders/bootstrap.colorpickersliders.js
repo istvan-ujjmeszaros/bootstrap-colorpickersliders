@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.1.3
+ *  v2.1.4
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -1004,9 +1004,10 @@
             function _updateConnectedInput() {
                 if (connectedinput) {
                     connectedinput.each(function(index, element) {
-                        var $element = $(element);
+                        var $element = $(element),
+                            format = $element.data('color-format') || settings.previewformat;
 
-                        switch ($element.data('color-format')) {
+                        switch (format) {
                             case 'hex':
                                 $element.val(color.tiny.toHexString());
                                 break;

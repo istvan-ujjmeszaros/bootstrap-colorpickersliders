@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.3
+ *  v2.1.4
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -896,9 +896,10 @@
             function _updateConnectedInput() {
                 if (connectedinput) {
                     connectedinput.each(function(index, element) {
-                        var $element = $(element);
+                        var $element = $(element),
+                            format = $element.data('color-format') || settings.previewformat;
 
-                        switch ($element.data('color-format')) {
+                        switch (format) {
                             case 'hex':
                                 $element.val(color.tiny.toHexString());
                                 break;
