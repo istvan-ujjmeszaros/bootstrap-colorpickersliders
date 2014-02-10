@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.4
+ *  v2.1.5
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -42,6 +42,7 @@
             var alreadyinitialized = false,
                     settings,
                     triggerelement = $(this),
+                    triggerelementisinput = triggerelement.is("input"),
                     container,
                     popover_container,
                     elements,
@@ -164,7 +165,7 @@
             }
 
             function _initColor() {
-                if (triggerelement.is("input")) {
+                if (triggerelementisinput) {
                     color.tiny = tinycolor(triggerelement.val());
 
                     if (!color.tiny.format) {
@@ -352,7 +353,7 @@
 
             function showFlat() {
                 if (settings.flat) {
-                    if (triggerelement.is("input")) {
+                    if (triggerelementisinput) {
                         container = $('<div class="cp-container"></div>').insertAfter(triggerelement);
                     }
                     else {
@@ -412,7 +413,7 @@
                     // https://bugs.webkit.org/show_bug.cgi?id=22261
                     // and only input and button are focusable on iPad
                     // so it is safer to register click on any other than inputs
-                    if (!triggerelement.is("input")) {
+                    if (!triggerelementisinput) {
                         $(triggerelement).on("click", function(ev) {
                             show();
 
@@ -883,7 +884,7 @@
             }
 
             function _updateTriggerelementColor() {
-                if (!settings.flat && settings.previewontriggerelement) {
+                if (triggerelementisinput && settings.previewontriggerelement) {
                     if ((100 - color.hsla.l * 100) * color.hsla.a < settings.previewcontrasttreshold) {
                         triggerelement.css('background', color.tiny.toRgbString()).css('color', '#000');
                     }
