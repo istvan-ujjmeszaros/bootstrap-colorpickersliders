@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders without CIE Lch support
- *  v2.1.5
+ *  v2.1.6
  *
  *  Stripped CIE Lch support due to smaller code base and better performance.
  *
@@ -1036,12 +1036,12 @@
         var testelement = document.createElement('detectGradientSupport').style;
 
         try {
-            testelement.backgroundImage = "linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "linear-gradient(to top left, #9f9, white)";
             testelement.backgroundImage = "-o-linear-gradient(left top, #9f9, white)";
             testelement.backgroundImage = "-moz-linear-gradient(left top, #9f9, white)";
-            testelement.backgroundImage = "-webkit-linear-gradient(left top, #9f9, white)";
+            testelement.backgroundImage = "-webkit-linear-gradient(bottom right, #9f9, white)";
             testelement.backgroundImage = "-ms-linear-gradient(left top, #9f9, white)";
-            testelement.backgroundImage = "-webkit-gradient(linear, left top, right bottom, from(#9f9), to(white))";
+            testelement.backgroundImage = "-webkit-gradient(linear, 100% 100%, 0% 0%, from(#9f9), to(white))";
 
             if (testelement.backgroundImage.indexOf("gradient") === -1) {
                 return false;
@@ -1119,9 +1119,9 @@
         webkit += gradientstring;
         noprefix += gradientstring;
 
-        element.css("background-image", noprefix);
-        element.css("background-image", webkit);
         element.css("background-image", oldwebkit);
+        element.css("background-image", webkit);
+        element.css("background-image", noprefix);
     };
 
     $.fn.ColorPickerSliders.renderSVG = function(element, gradientstops) {
