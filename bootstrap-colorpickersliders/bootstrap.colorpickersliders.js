@@ -3,7 +3,7 @@
 
 /*!=========================================================================
  *  Bootstrap Color Picker Sliders
- *  v2.1.6
+ *  v2.1.7
  *
  *  A Bootstrap optimized advanced responsive color selector with color swatches
  *  and support for human perceived lightness.
@@ -143,10 +143,13 @@
 
                 alreadyinitialized = true;
 
-                if ($.fn.ColorPickerSliders.gradientSupported()) {
-                    rendermode = "css";
+                rendermode = $.fn.ColorPickerSliders.detectWhichGradientIsSupported();
+
+                if (rendermode === "filter") {
+                    rendermode = false;
                 }
-                else if ($.fn.ColorPickerSliders.svgSupported()) {
+
+                if (!rendermode && $.fn.ColorPickerSliders.svgSupported()) {
                     rendermode = "svg";
                 }
 
@@ -1157,11 +1160,22 @@
                     return a.position - b.position;
                 });
 
-                if (rendermode === "css") {
-                    $.fn.ColorPickerSliders.renderCSS(element, gradientstops);
-                }
-                else if (rendermode === "svg") {
-                    $.fn.ColorPickerSliders.renderSVG(element, gradientstops);
+                switch(rendermode) {
+                    case "noprefix":
+                        $.fn.ColorPickerSliders.renderNoprefix(element, gradientstops);
+                        break;
+                    case "webkit":
+                        $.fn.ColorPickerSliders.renderWebkit(element, gradientstops);
+                        break;
+                    case "ms":
+                        $.fn.ColorPickerSliders.renderMs(element, gradientstops);
+                        break;
+                    case "svg": // can not repeat, radial can be only a covering ellipse (maybe there is a workaround, need more investigation)
+                        $.fn.ColorPickerSliders.renderSVG(element, gradientstops);
+                        break;
+                    case "oldwebkit":   // can not repeat, no percent size with radial gradient (and no ellipse)
+                        $.fn.ColorPickerSliders.renderOldwebkit(element, gradientstops);
+                        break;
                 }
             };
 
@@ -1201,29 +1215,6 @@
         }
 
         return percent;
-    };
-
-    $.fn.ColorPickerSliders.gradientSupported = function() {
-        var testelement = document.createElement('detectGradientSupport').style;
-
-        try {
-            testelement.backgroundImage = "linear-gradient(to top left, #9f9, white)";
-            testelement.backgroundImage = "-o-linear-gradient(left top, #9f9, white)";
-            testelement.backgroundImage = "-moz-linear-gradient(left top, #9f9, white)";
-            testelement.backgroundImage = "-webkit-linear-gradient(bottom right, #9f9, white)";
-            testelement.backgroundImage = "-ms-linear-gradient(left top, #9f9, white)";
-            testelement.backgroundImage = "-webkit-gradient(linear, 100% 100%, 0% 0%, from(#9f9), to(white))";
-
-            if (testelement.backgroundImage.indexOf("gradient") === -1) {
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
-        catch (err) {
-            return false;
-        }
     };
 
     $.fn.ColorPickerSliders.getScaledGradientStops = function(color, scalableproperty, minvalue, maxvalue, steps, invalidcolorsopacity, minposition, maxposition) {
@@ -1269,40 +1260,68 @@
         return gradientStops;
     };
 
-    $.fn.ColorPickerSliders.renderCSS = function(element, gradientstops) {
+    $.fn.ColorPickerSliders.getGradientStopsCSSString = function(gradientstops) {
         var gradientstring = "",
-                noprefix = "linear-gradient(to right",
-                webkit = "-webkit-linear-gradient(left",
-                oldwebkit = "-webkit-gradient(linear, left top, right top";
+            oldwebkit = "",
+            svgstoppoints = "";
 
         for (var i = 0; i < gradientstops.length; i++) {
             var el = gradientstops[i];
 
             gradientstring += "," + el.color + " " + el.position + "%";
             oldwebkit += ",color-stop(" + el.position + "%," + el.color + ")";
+
+            var svgcolor = tinycolor(el.color);
+
+            svgstoppoints += '<stop ' + 'stop-color="' + svgcolor.toHexString() + '" stop-opacity="' + svgcolor.toRgb().a + '"' + ' offset="' + el.position/100 + '"/>';
         }
 
-        gradientstring += ")";
-        oldwebkit += ")";
+        return {
+            noprefix: gradientstring,
+            oldwebkit: oldwebkit,
+            svg: svgstoppoints
+        };
+    };
 
-        webkit += gradientstring;
-        noprefix += gradientstring;
+    $.fn.ColorPickerSliders.renderNoprefix = function(element, gradientstops) {
+        var css = "linear-gradient(to right",
+            stoppoints = $.fn.ColorPickerSliders.getGradientStopsCSSString(gradientstops).noprefix;
 
-        element.css("background-image", oldwebkit);
-        element.css("background-image", webkit);
-        element.css("background-image", noprefix);
+        css += stoppoints + ")";
+
+        element.css("background-image", css);
+    };
+
+    $.fn.ColorPickerSliders.renderWebkit = function(element, gradientstops) {
+        var css = "-webkit-linear-gradient(left",
+            stoppoints = $.fn.ColorPickerSliders.getGradientStopsCSSString(gradientstops).noprefix;
+
+        css += stoppoints + ")";
+
+        element.css("background-image", css);
+    };
+
+    $.fn.ColorPickerSliders.renderOldwebkit = function(element, gradientstops) {
+        var css = "-webkit-gradient(linear, 0% 0%, 100% 0%",
+            stoppoints = $.fn.ColorPickerSliders.getGradientStopsCSSString(gradientstops).oldwebkit;
+
+        css += stoppoints + ")";
+
+        element.css("background-image", css);
+    };
+
+    $.fn.ColorPickerSliders.renderMs = function(element, gradientstops) {
+        var css = "-ms-linear-gradient(to right",
+            stoppoints = $.fn.ColorPickerSliders.getGradientStopsCSSString(gradientstops).noprefix;
+
+        css += stoppoints + ")";
+
+        element.css("background-image", css);
     };
 
     $.fn.ColorPickerSliders.renderSVG = function(element, gradientstops) {
         var svg = "",
-            svgstoppoints = "";
-
-        for (var i = 0; i < gradientstops.length; i++) {
-            var el = gradientstops[i],
-                svgcolor = tinycolor(el.color);
-
-            svgstoppoints += '<stop ' + 'stop-color="' + svgcolor.toHexString() + '" stop-opacity="' + svgcolor.toRgb().a + '"' + ' offset="' + el.position/100 + '"/>';
-        }
+            svgstoppoints = $.fn.ColorPickerSliders.getGradientStopsCSSString(gradientstops).svg;
 
         svg = '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="vsgg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="0">';
         svg += svgstoppoints;
@@ -1310,10 +1329,6 @@
         svg = "url(data:image/svg+xml;base64," + $.fn.ColorPickerSliders.base64encode(svg) + ")";
 
         element.css("background-image", svg);
-    };
-
-    $.fn.ColorPickerSliders.svgSupported = function() {
-        return !! document.createElementNS && !! document.createElementNS('http://www.w3.org/2000/svg','svg').createSVGRect;
     };
 
     /* source: http://phpjs.org/functions/base64_encode/ */
@@ -1665,6 +1680,47 @@
         rgb.b = Math.round(rgb.b * 255);
 
         return rgb;
+    };
+
+    $.fn.ColorPickerSliders.detectWhichGradientIsSupported = function() {
+        var testelement = document.createElement('detectGradientSupport').style;
+
+        try {
+            testelement.backgroundImage = "linear-gradient(to top left, #9f9, white)";
+            if (testelement.backgroundImage.indexOf("gradient") !== -1) {
+                return "noprefix";
+            }
+
+            testelement.backgroundImage = "-webkit-linear-gradient(left top, #9f9, white)";
+            if (testelement.backgroundImage.indexOf("gradient") !== -1) {
+                return "webkit";
+            }
+
+            testelement.backgroundImage = "-ms-linear-gradient(left top, #9f9, white)";
+            if (testelement.backgroundImage.indexOf("gradient") !== -1) {
+                return "ms";
+            }
+
+            testelement.backgroundImage = "-webkit-gradient(linear, left top, right bottom, from(#9f9), to(white))";
+            if (testelement.backgroundImage.indexOf("gradient") !== -1) {
+                return "oldwebkit";
+            }
+        }
+        catch(err) {
+            try {
+                testelement.filter = "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#000000',GradientType=0)";
+                if (testelement.filter.indexOf("DXImageTransform") !== -1) {
+                    return "filter";
+                }
+            }
+            catch(err) {}
+        }
+
+        return false;
+    };
+
+    $.fn.ColorPickerSliders.svgSupported = function() {
+        return !! document.createElementNS && !! document.createElementNS('http://www.w3.org/2000/svg','svg').createSVGRect;
     };
 
 })(jQuery);
