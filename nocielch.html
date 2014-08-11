@@ -76,7 +76,7 @@
         </div>
       </div>
 
-      <h3>HSL and CIE Lch sliders with customizable color swatches (flat rendering)</h3>
+      <h3>HSL sliders with customizable color swatches (flat rendering)</h3>
 
       <div class="row">
         <div class="col-md-6">
@@ -92,8 +92,7 @@
         flat: true,
         order: {
             hsl: 1,
-            cie: 2,
-            preview: 3
+            preview: 2
         }
     });
 &lt;/script&gt;
@@ -104,8 +103,7 @@
               flat: true,
               order: {
                 hsl: 1,
-                cie: 2,
-                preview: 3
+                preview: 2
               }
             });
           </script>
@@ -153,7 +151,7 @@
               <input type="text" class="form-control" id="default" value="#7f7f7f">
             </div>
             <div class="form-group">
-              <label for="large" class="control-label">Large sized CIE Lch</label>
+              <label for="large" class="control-label">Large sized HSL</label>
               <input type="text" class="form-control" id="large" value="rgb(251, 167, 219)">
             </div>
             <div class="form-group">
@@ -161,7 +159,7 @@
               <input type="text" class="form-control" id="swatchesonly">
             </div>
             <div class="form-group">
-              <label for="hslswatches" class="control-label">HSL with opdacity and swatches</label>
+              <label for="hslswatches" class="control-label">HSL with opdacity and swatches (grouping disabled)</label>
               <input type="text" class="form-control" id="hslswatches" value="hsl(180, 50%, 50%)">
             </div>
           </form>
@@ -178,7 +176,7 @@
 &lt;script&gt;
   $(&quot;input#small&quot;).ColorPickerSliders({
     size: 'sm',
-    placement: 'bottom',
+    placement: 'right',
     swatches: false,
     order: {
       hsl: 1
@@ -192,7 +190,7 @@
     hsvpanel: true
   });
   $(&quot;input#default&quot;).ColorPickerSliders({
-    placement: 'bottom',
+    placement: 'right',
     swatches: false,
     order: {
       rgb: 1
@@ -200,21 +198,22 @@
   });
   $(&quot;input#large&quot;).ColorPickerSliders({
     size: 'lg',
-    placement: 'bottom',
+    placement: 'right',
     swatches: false,
     order: {
-      cie: 1
+      hsl: 1
     }
   });
   $(&quot;input#swatchesonly&quot;).ColorPickerSliders({
-    placement: 'bottom',
+    placement: 'right',
     color: 'red',
     swatches: ['red', 'green', 'blue'],
     customswatches: false,
     order: {}
   });
   $(&quot;input#hslswatches&quot;).ColorPickerSliders({
-    placement: 'bottom',
+    placement: 'right',
+    grouping: false,
     order: {
       hsl: 1,
       opacity: 2
@@ -226,7 +225,7 @@
           <script>
             $("input#small").ColorPickerSliders({
               size: 'sm',
-              placement: 'bottom',
+              placement: 'right',
               swatches: false,
               order: {
                 hsl: 1
@@ -240,7 +239,7 @@
               hsvpanel: true
             });
             $("input#default").ColorPickerSliders({
-              placement: 'bottom',
+              placement: 'right',
               swatches: false,
               order: {
                 rgb: 1
@@ -248,21 +247,22 @@
             });
             $("input#large").ColorPickerSliders({
               size: 'lg',
-              placement: 'bottom',
+              placement: 'right',
               swatches: false,
               order: {
-                cie: 1
+                hsl: 1
               }
             });
             $("input#swatchesonly").ColorPickerSliders({
-              placement: 'bottom',
+              placement: 'right',
               color: 'red',
               swatches: ['red', 'green', 'blue'],
               customswatches: false,
               order: {}
             });
             $("input#hslswatches").ColorPickerSliders({
-              placement: 'bottom',
+              placement: 'right',
+              grouping: false,
               order: {
                 hsl: 1,
                 opacity: 2
@@ -386,10 +386,6 @@
             <td><code>placement</code></td>
             <td>Popover placement direction. Can be <code><strong>'auto'</strong></code> | <code>'top'</code> | <code>'left'</code> | <code>'bottom'</code> | <code>'right'</code></code>.<br>
               When <code>'auto'</code> is specified, it will dynamically reorient the popover. For example, if placement is <code>'auto left'</code>, the tooltip will display to the left when possible, otherwise it will display right.</tr>
-          <tr>
-            <td><code>preventtouchkeyboardonshow</code></td>
-            <td><code><strong>true</strong></code>: Makes the input readonly to prevent touch keyboard to show up on focus, needs a second click to become editable.</td>
-          </tr>
           <tr>
             <td><code>title</code></td>
             <td><code><strong>''</strong></code>: Popover title.</td>

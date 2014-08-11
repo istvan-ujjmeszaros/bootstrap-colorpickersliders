@@ -1,0 +1,36 @@
+{
+  "name": "bootstrap-colorpickersliders",
+  "title": "Bootstrap Color Picker Sliders",
+  "description": "Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.",
+  "author": {
+    "name": "István Ujj-Mészáros",
+    "url": "https://github.com/istvan-ujjmeszaros"
+  },
+  "contributors": [
+    {
+      "name": "imaguiraga",
+      "url": "https://github.com/imaguiraga"
+    },
+    {
+      "name": "Balmasich",
+      "url": "https://github.com/balmasich"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/istvan-ujjmeszaros/bootstrap-colorpickersliders.git"
+  },
+  "homepage": "http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
+  "version": "3.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-cssmin": "~0.9.0"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "istvan-ujjmeszaros/bootstrap-colorpickersliders",
+  "type": "library",
+  "keywords": [
+    "colorpicker",
+    "bootstrap",
+    "input",
+    "responsive",
+    "color",
+    "picker",
+    "widget",
+    "colorchooser"
+  ],
+  "description": "Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.",
+  "homepage": "http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
+  "version": "3.0.0",
+  "authors": [
+    {
+      "name": "István Ujj-Mészáros",
+      "homepage": "https://github.com/istvan-ujjmeszaros"
+    }
+  ],
+  "license": "Apache-2.0",
+  "suggest": {
+    "components/jquery": "1.7.*",
+    "twbs/bootstrap": "3.*"
+  }
+}

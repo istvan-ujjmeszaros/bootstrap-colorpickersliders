@@ -1,6 +1,10 @@
+.DS_Store
+.idea
 .hg
-.git
 .hgignore
 nbproject
-index_demo_site.html
-
+*.iml
+*.ipr
+*.iws
+node_modules
+bower_components

@@ -1,11 +1,11 @@
 Bootstrap Color Picker Sliders
 
-A Bootstrap 3 optimized advanced responsive color selector with color swatches and support for human perceived lightness. Works in all modern browsers and on touch devices.
+Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.
 
 - https://github.com/istvan-meszaros/bootstrap-colorpickersliders
 - http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/
 
-Copyright 2013 István Ujj-Mészáros
+Copyright 2014 István Ujj-Mészáros
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
