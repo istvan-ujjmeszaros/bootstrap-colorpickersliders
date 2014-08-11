@@ -1,4 +1,4 @@
-# Bootstrap Color Picker Sliders
+# Bootstrap Color Picker Sliders [![Build Status](https://secure.travis-ci.org/istvan-ujjmeszaros/bootstrap-colorpickersliders.png?branch=master)](https://travis-ci.org/istvan-ujjmeszaros/bootstrap-colorpickersliders)
 
 Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.
 
