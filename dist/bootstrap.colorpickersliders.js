@@ -1,5 +1,5 @@
 /*
- *  Bootstrap Color Picker Sliders - v3.0.0
+ *  Bootstrap Color Picker Sliders - v3.0.1
  *
  *  Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.
  *  http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/
@@ -1350,7 +1350,12 @@
 
             switch (format) {
               case 'hex':
-                $element.val(color.tiny.toHexString());
+                if (color.hsla.a < 1) {
+                  $element.val(color.tiny.toRgbString());
+                }
+                else {
+                  $element.val(color.tiny.toHexString());
+                }
                 break;
               case 'hsl':
                 $element.val(color.tiny.toHslString());
@@ -1493,7 +1498,12 @@
 
         switch (settings.previewformat) {
           case 'hex':
-            colorstring = color.tiny.toHexString();
+            if (color.hsla.a < 1) {
+              colorstring = color.tiny.toRgbString();
+            }
+            else {
+              colorstring = color.tiny.toHexString();
+            }
             break;
           case 'hsl':
             colorstring = color.tiny.toHslString();
