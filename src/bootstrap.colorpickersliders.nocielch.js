@@ -1221,7 +1221,12 @@
 
             switch (format) {
               case 'hex':
-                $element.val(color.tiny.toHexString());
+                if (color.hsla.a < 1) {
+                  $element.val(color.tiny.toRgbString());
+                }
+                else {
+                  $element.val(color.tiny.toHexString());
+                }
                 break;
               case 'hsl':
                 $element.val(color.tiny.toHslString());
@@ -1301,7 +1306,12 @@
 
         switch (settings.previewformat) {
           case 'hex':
-            colorstring = color.tiny.toHexString();
+            if (color.hsla.a < 1) {
+              colorstring = color.tiny.toRgbString();
+            }
+            else {
+              colorstring = color.tiny.toHexString();
+            }
             break;
           case 'hsl':
             colorstring = color.tiny.toHslString();

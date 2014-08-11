@@ -43,14 +43,37 @@
 
       <h2>Examples</h2>
 
+      <h3>Full featured popover (HSV panel, HSL and RGB sliders, color swatches)</h3>
+
+      This popovers shows all the features in a grouped manner, so the user can choose the preferred color picking method.
+
+      <div class="row">
+        <div class="col-md-4">
+          <form class="form-vertical" role="form">
+            <div class="form-group">
+              <label for="small" class="control-label">Full featured popover</label>
+              <input type="text" class="form-control" id="full-popover" value="#A6FF00" data-color-format="hex">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <script>
+        $("input#full-popover").ColorPickerSliders({
+          placement: 'right',
+          hsvpanel: true,
+          previewformat: 'hex'
+        });
+      </script>
+
       <h3>HSV flat</h3>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div id="hsvflat"></div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
           <pre class="prettyprint">
 &lt;div id=&quot;hsvflat&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -110,28 +133,6 @@
 
         </div>
       </div>
-
-      <h3>Full featured popover (HSV panel, HSL and RGB sliders, color swatches)</h3>
-
-      This popovers shows all the features in a grouped manner, so the user can choose the preferred color picking method.
-
-      <div class="row">
-        <div class="col-md-4">
-          <form class="form-vertical" role="form">
-            <div class="form-group">
-              <label for="small" class="control-label">Full featured popover</label>
-              <input type="text" class="form-control" id="full-popover" value="#0040FF">
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <script>
-        $("input#full-popover").ColorPickerSliders({
-          placement: 'right',
-          hsvpanel: true
-        });
-      </script>
 
       <h3>Different sizes and color sliders (in bootstrap popovers)</h3>
 
