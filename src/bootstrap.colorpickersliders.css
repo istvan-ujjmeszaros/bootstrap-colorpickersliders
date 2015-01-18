@@ -1,3 +1,8 @@
+/* -mm-start------------------------ */
+/* all my additions and changes are between mm-start and mm-end comments */
+/* -mm-end-------------------------- */
+
+
 .cp-container {
   width: auto;
   position: relative;
@@ -18,6 +23,37 @@
   margin-bottom: 5pt;
   position: relative;
 }
+
+/* -mm-start------------------------ */
+.cp-container  .cp-sliderbutton {
+  color: #fff;
+  background-color: #333;
+  background-image: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 20px;
+  height: 26px;
+  border: 2px solid #999;
+  border-radius: 8px;
+  margin: 0 4px;
+  margin-bottom: 5pt;
+  cursor: pointer;
+}
+
+.cp-container  .cp-sliderbutton-minus {
+  float: left;
+  position: relative;
+  left: -22px;
+}
+
+.cp-container  .cp-sliderbutton-plus {
+  float: right;
+  position: relative;
+  left: 22px;
+}
+/* -mm-end-------------------------- */
 
 .cp-container .cp-hsvpanel {
   width: auto;
