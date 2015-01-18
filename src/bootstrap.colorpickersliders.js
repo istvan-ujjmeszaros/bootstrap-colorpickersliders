@@ -1,8 +1,3 @@
-/* -mm-start------------------------ */
-/* all my additions and changes are between mm-start and mm-end comments */
-/* -mm-end-------------------------- */
-
-
 (function($) {
   'use strict';
 
@@ -66,10 +61,8 @@
           erroneousciecolormarkers: true,
           invalidcolorsopacity: 1, // everything below 1 causes slightly slower responses
           finercierangeedges: true, // can be disabled for faster responses
-          /* -mm-start------------------------ */
           rendervalues: false,
           slidersplusminus: false,
-          /* -mm-end-------------------------- */
           titleswatchesadd: 'Add color to swatches',
           titleswatchesremove: 'Remove color from swatches',
           titleswatchesreset: 'Reset to default swatches',
@@ -83,9 +76,7 @@
           settings.order = $.extend({
             opacity: false,
             hsl: false,
-            /* -mm-start------------------------ */
             lightness: false,
-            /* -mm-end-------------------------- */
             rgb: false,
             cie: false,
             preview: false
@@ -287,16 +278,13 @@
 
         triggerelement.popover('show');
 
-        /* -mm-start------------------------ */
         if (settings.slidersplusminus) {
           var button_width, popover;
           button_width = parseInt( $('.cp-container .cp-sliderbutton').css('width'), 10);
           popover = $('.cp-popover-container .popover-content');
-          popover.css('padding-left', ( parseInt(popover.css('padding-left'), 10) + button_width ) + 'px');
-          popover.css('padding-right', ( parseInt(popover.css('padding-right'), 10) + button_width ) + 'px');
-
+          popover.css('padding-left', (parseInt(popover.css('padding-left'), 10) + button_width ) + 'px');
+          popover.css('padding-right', (parseInt(popover.css('padding-right'), 10) + button_width ) + 'px');
         }
-        /* -mm-end-------------------------- */
       }
 
       function hidePopover() {
@@ -310,7 +298,6 @@
         var sliders = [],
             color_picker_html = '';
 
-        /* -mm-start------------------------ */
         if (settings.sliders) {
 
           if (settings.order.opacity !== false) {
@@ -321,11 +308,11 @@
                 '<div id="mm-minus" class="cp-opacity cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-opacity cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.opacity] +=
-                '<div class="cp-slider cp-opacity cp-transparency">' +
-                  '<span>' + settings.labels.opacity + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.opacity] +=
+              '<div class="cp-slider cp-opacity cp-transparency">' +
+                '<span>' + settings.labels.opacity + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
           }
 
           if (settings.order.hsl !== false) {
@@ -336,47 +323,49 @@
                 '<div id="mm-minus" class="cp-hslhue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-hslhue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.hsl] +=
-                '<div class="cp-slider cp-hslhue cp-transparency">' +
-                  '<span>' + settings.labels.hslhue + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.hsl] +=
+              '<div class="cp-slider cp-hslhue cp-transparency">' +
+                '<span>' + settings.labels.hslhue + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.hsl] +=
                 '<div class="cp-hslsaturation cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div class="cp-hslsaturation cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.hsl] +=
-                '<div class="cp-slider cp-hslsaturation cp-transparency">' +
-                  '<span>' + settings.labels.hslsaturation + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.hsl] +=
+              '<div class="cp-slider cp-hslsaturation cp-transparency">' +
+                '<span>' + settings.labels.hslsaturation + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.hsl] +=
                 '<div class="cp-hsllightness cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div class="cp-hsllightness cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.hsl] +=
-                '<div class="cp-slider cp-hsllightness cp-transparency">' +
-                  '<span>' + settings.labels.hsllightness + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.hsl] +=
+              '<div class="cp-slider cp-hsllightness cp-transparency">' +
+                '<span>' + settings.labels.hsllightness + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
           }
 
+          /* mircmm: my special case, I needed only L from HSL */
           if (settings.order.lightness !== false) {
             sliders[settings.order.lightness] = '';
+
             if (settings.slidersplusminus) {
               sliders[settings.order.lightness] +=
                 '<div class="cp-hsllightness cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div class="cp-hsllightness cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.lightness] +=
-                '<div class="cp-slider cp-hsllightness cp-transparency">' +
-                  '<span>' + settings.labels.hsllightness + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.lightness] +=
+              '<div class="cp-slider cp-hsllightness cp-transparency">' +
+                '<span>' + settings.labels.hsllightness + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
           }
 
           if (settings.order.rgb !== false) {
@@ -387,33 +376,33 @@
                 '<div id="mm-minus" class="cp-rgbred  cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-rgbred cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.rgb] +=
-                '<div class="cp-slider cp-rgbred cp-transparency">' +
-                  '<span>' + settings.labels.rgbred + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.rgb] +=
+              '<div class="cp-slider cp-rgbred cp-transparency">' +
+                '<span>' + settings.labels.rgbred + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.rgb] +=
                 '<div id="mm-minus" class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.rgb] +=
-                '<div class="cp-slider cp-rgbgreen cp-transparency">' +
-                  '<span>' + settings.labels.rgbgreen + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.rgb] +=
+              '<div class="cp-slider cp-rgbgreen cp-transparency">' +
+                '<span>' + settings.labels.rgbgreen + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.rgb] +=
                 '<div id="mm-minus" class="cp-rgbblue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-rgbblue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.rgb] +=
-                '<div class="cp-slider cp-rgbblue cp-transparency">' +
-                  '<span>' + settings.labels.rgbblue + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.rgb] +=
+              '<div class="cp-slider cp-rgbblue cp-transparency">' +
+                '<span>' + settings.labels.rgbblue + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
           }
 
           if (settings.order.cie !== false) {
@@ -424,33 +413,33 @@
                 '<div id="mm-minus" class="cp-cielightness cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-cielightness cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.cie] +=
-                '<div class="cp-slider cp-cielightness cp-transparency">' +
-                  '<span>' + settings.labels.cielightness + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.cie] +=
+              '<div class="cp-slider cp-cielightness cp-transparency">' +
+                '<span>' + settings.labels.cielightness + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.cie] +=
                 '<div id="mm-minus" class="cp-ciechroma cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-ciechroma cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.cie] +=
-                '<div class="cp-slider cp-ciechroma cp-transparency">' +
-                  '<span>' + settings.labels.ciechroma + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.cie] +=
+              '<div class="cp-slider cp-ciechroma cp-transparency">' +
+                '<span>' + settings.labels.ciechroma + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
 
             if (settings.slidersplusminus) {
               sliders[settings.order.cie] +=
                 '<div id="mm-minus" class="cp-ciehue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
                 '<div id="mm-plus" class="cp-ciehue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
-              sliders[settings.order.cie] +=
-                '<div class="cp-slider cp-ciehue cp-transparency">' +
-                  '<span>' + settings.labels.ciehue + '</span>' +
-                  '<div class="cp-marker"></div>' +
-                '</div>';
+            sliders[settings.order.cie] +=
+              '<div class="cp-slider cp-ciehue cp-transparency">' +
+                '<span>' + settings.labels.ciehue + '</span>' +
+                '<div class="cp-marker"></div>' +
+              '</div>';
           }
 
           if (settings.order.preview !== false) {
@@ -459,7 +448,6 @@
           }
 
         }
-        /* -mm-end-------------------------- */
 
         if (settings.grouping) {
           if (!!settings.hsvpanel + !!(settings.sliders && sliders.length > 0) + !!settings.swatches > 1) {
@@ -551,9 +539,7 @@
             ciehue: $('.cp-ciehue span', container),
             ciehue_marker: $('.cp-ciehue .cp-marker', container),
             preview: $('.cp-preview input', container),
-            /* -mm-start------------------------ */
             slider_button: $('.cp-sliderbutton', container)
-            /* -mm-end-------------------------- */
             },
           all_pills: $('.cp-pills', container),
           pills: {
@@ -707,7 +693,6 @@
           ev.stopImmediatePropagation();
         });
 
-        /* -mm-start------------------------ */
         elements.sliders.slider_button.on('click', function(ev) {
           ev.preventDefault();
           if (ev.which > 1) {
@@ -768,7 +753,6 @@
 
           _updateAllElements();
         });
-        /* -mm-end-------------------------- */
 
         elements.sliders.hue.parent().on('touchstart mousedown', function(ev) {
           ev.preventDefault();
@@ -1489,11 +1473,9 @@
             _renderLightness();
           }
 
-          /* -mm-start------------------------ */
           if (settings.order.lightness !== false) {
             _renderLightness();
           }
-          /* -mm-end-------------------------- */
 
           if (settings.order.rgb !== false) {
             _renderRed();
@@ -1595,71 +1577,57 @@
 
       function _renderHue() {
         setGradient(elements.sliders.hue, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, 'h', 0, 360, 7));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.hue.html(settings.labels.hslhue + ': ' + (color.hsla.h).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.hue_marker.css('left', color.hsla.h / 360 * 100 + '%');
       }
 
       function _renderSaturation() {
         setGradient(elements.sliders.saturation, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, 's', 0, 1, 2));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.saturation.html(settings.labels.hslsaturation + ': ' + (color.hsla.s * 100).toFixed(0) + '%');
         }
-        /* -mm-end-------------------------- */
         elements.sliders.saturation_marker.css('left', color.hsla.s * 100 + '%');
       }
 
       function _renderLightness() {
         setGradient(elements.sliders.lightness, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, 'l', 0, 1, 3));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.lightness.html(settings.labels.hsllightness + ': ' + (color.hsla.l * 100).toFixed(0) + '%');
         }
-        /* -mm-end-------------------------- */
         elements.sliders.lightness_marker.css('left', color.hsla.l * 100 + '%');
       }
 
       function _renderOpacity() {
         setGradient(elements.sliders.opacity, $.fn.ColorPickerSliders.getScaledGradientStops(color.hsla, 'a', 0, 1, 2));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.opacity.html(settings.labels.opacity + ': ' + (color.hsla.a * 100).toFixed(0) + '%');
         }
-        /* -mm-end-------------------------- */
         elements.sliders.opacity_marker.css('left', color.hsla.a * 100 + '%');
       }
 
       function _renderRed() {
         setGradient(elements.sliders.red, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, 'r', 0, 255, 2));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.red.html(settings.labels.rgbred + ': ' + (color.rgba.r).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.red_marker.css('left', color.rgba.r / 255 * 100 + '%');
       }
 
       function _renderGreen() {
         setGradient(elements.sliders.green, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, 'g', 0, 255, 2));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.green.html(settings.labels.rgbgreen + ': ' + (color.rgba.g).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.green_marker.css('left', color.rgba.g / 255 * 100 + '%');
       }
 
       function _renderBlue() {
         setGradient(elements.sliders.blue, $.fn.ColorPickerSliders.getScaledGradientStops(color.rgba, 'b', 0, 255, 2));
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.blue.html(settings.labels.rgbblue + ': ' + (color.rgba.b).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.blue_marker.css('left', color.rgba.b / 255 * 100 + '%');
       }
 
@@ -1702,11 +1670,9 @@
         gradientstops = _extendCieGradientStops(gradientstops, 'l');
 
         setGradient(elements.sliders.cielightness, gradientstops);
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.cielightness.html(settings.labels.cielightness + ': ' + (color.cielch.l).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.cielightness_marker.css('left', color.cielch.l / MAXLIGHT * 100 + '%');
       }
 
@@ -1716,11 +1682,9 @@
         gradientstops = _extendCieGradientStops(gradientstops, 'c');
 
         setGradient(elements.sliders.ciechroma, gradientstops);
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.ciechroma.html(settings.labels.ciechroma + ': ' + (color.cielch.c).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.ciechroma_marker.css('left', color.cielch.c / MAXVALIDCHROMA * 100 + '%');
       }
 
@@ -1730,11 +1694,9 @@
         gradientstops = _extendCieGradientStops(gradientstops, 'h');
 
         setGradient(elements.sliders.ciehue, gradientstops);
-        /* -mm-start------------------------ */
         if (settings.rendervalues) {
           elements.sliders.ciehue.html(settings.labels.ciehue + ': ' + (color.cielch.h).toFixed(0));
         }
-        /* -mm-end-------------------------- */
         elements.sliders.ciehue_marker.css('left', color.cielch.h / 360 * 100 + '%');
       }
 

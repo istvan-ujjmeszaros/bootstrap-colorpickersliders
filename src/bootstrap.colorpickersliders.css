@@ -1,8 +1,3 @@
-/* -mm-start------------------------ */
-/* all my additions and changes are between mm-start and mm-end comments */
-/* -mm-end-------------------------- */
-
-
 .cp-container {
   width: auto;
   position: relative;
@@ -24,7 +19,6 @@
   position: relative;
 }
 
-/* -mm-start------------------------ */
 .cp-container  .cp-sliderbutton {
   color: #fff;
   background-color: #333;
@@ -53,7 +47,6 @@
   position: relative;
   left: 22px;
 }
-/* -mm-end-------------------------- */
 
 .cp-container .cp-hsvpanel {
   width: auto;
