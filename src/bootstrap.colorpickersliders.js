@@ -32,7 +32,7 @@
             hsv: null,
             cielch: null
           },
-      MAXVALIDCHROMA = 144;   // maximum valid chroma value found convertible to rgb (blue)
+      MAXVALIDCHROMA = 150;   // maximum valid chroma value found convertible to rgb (blue) changed from 144 to 150
 
       init();
 
@@ -51,7 +51,7 @@
           hsvpanel: false,
           sliders: true,
           grouping: true,
-          swatches: ['FFFFFF', 'C0C0C0', '808080', '000000', 'FF0000', '800000', 'FFFF00', '808000', '00FF00', '008000', '00FFFF', '008080', '0000FF', '000080', 'FF00FF', '800080'], // array or false to disable swatches
+          swatches: ['FFFFFF', 'C0C0C0', '808080', '404040', '000000', 'FF0000', '800000', 'FFFF00', '808000', '00FF00', '008000', '00FFFF', '008080', '0000FF', '000080', 'FF00FF', '800080'], // array or false to disable swatches
           customswatches: 'colorpickkersliders', // false or a grop name
           connectedinput: false, // can be a jquery object or a selector
           flat: false,
@@ -1797,9 +1797,9 @@
 
   $.fn.ColorPickerSliders.isGoodRgb = function(rgb) {
     // the default acceptable values are out of 0..255 due to
-    // rounding errors with yellow and blue colors (258, -1)
+    // rounding errors with yellow and blue colors (258, -3)
     var maxacceptable = 258;
-    var minacceptable = -1;
+    var minacceptable = -3;
 
     if (rgb.r > maxacceptable || rgb.g > maxacceptable || rgb.b > maxacceptable || rgb.r < minacceptable || rgb.g < minacceptable || rgb.b < minacceptable) {
       return false;
@@ -1861,7 +1861,7 @@
       else {
         lastbadchroma = tmp.c;
       }
-    } while (Math.abs(lastbadchroma - lastgoodchroma) > 0.9 && loops < 100);
+    } while (Math.abs(lastbadchroma - lastgoodchroma) > 0.01 && loops < 100); // Needs to be so accurate (0.01 is so accurate) (0.9 got maximum RGB error of 20)
 
     if (lch.hasOwnProperty('a')) {
       rgb.a = lch.a;
