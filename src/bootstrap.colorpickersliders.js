@@ -57,7 +57,7 @@
           updateinterval: 30, // update interval of the sliders while in drag (ms)
           previewontriggerelement: true,
           previewcontrasttreshold: 15,
-          previewformat: 'rgb', // rgb | hsl | hex
+          previewformat: 'rgb', // rgb | hsl | hex | hsl-rgb
           erroneousciecolormarkers: true,
           invalidcolorsopacity: 1, // everything below 1 causes slightly slower responses
           finercierangeedges: true, // can be disabled for faster responses
@@ -282,8 +282,8 @@
           var button_width, popover;
           button_width = parseInt( $('.cp-container .cp-sliderbutton').css('width'), 10);
           popover = $('.cp-popover-container .popover-content');
-          popover.css('padding-left', (parseInt(popover.css('padding-left'), 10) + button_width ) + 'px');
-          popover.css('padding-right', (parseInt(popover.css('padding-right'), 10) + button_width ) + 'px');
+          popover.css('padding-left', (parseInt(popover.css('padding-left'), 10) + button_width - 6) + 'px');
+          popover.css('padding-right', (parseInt(popover.css('padding-right'), 10) + button_width - 6) + 'px');
         }
       }
 
@@ -305,8 +305,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.opacity] +=
-                '<div id="mm-minus" class="cp-opacity cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-opacity cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-opacity cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-opacity cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.opacity] +=
               '<div class="cp-slider cp-opacity cp-transparency">' +
@@ -320,8 +320,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.hsl] +=
-                '<div id="mm-minus" class="cp-hslhue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-hslhue cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-hslhue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-hslhue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.hsl] +=
               '<div class="cp-slider cp-hslhue cp-transparency">' +
@@ -352,7 +352,6 @@
               '</div>';
           }
 
-          /* mircmm: my special case, I needed only L from HSL */
           if (settings.order.lightness !== false) {
             sliders[settings.order.lightness] = '';
 
@@ -373,8 +372,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.rgb] +=
-                '<div id="mm-minus" class="cp-rgbred  cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-rgbred cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-rgbred  cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-rgbred cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.rgb] +=
               '<div class="cp-slider cp-rgbred cp-transparency">' +
@@ -384,8 +383,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.rgb] +=
-                '<div id="mm-minus" class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-rgbgreen cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.rgb] +=
               '<div class="cp-slider cp-rgbgreen cp-transparency">' +
@@ -395,8 +394,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.rgb] +=
-                '<div id="mm-minus" class="cp-rgbblue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-rgbblue cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-rgbblue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-rgbblue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.rgb] +=
               '<div class="cp-slider cp-rgbblue cp-transparency">' +
@@ -410,8 +409,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.cie] +=
-                '<div id="mm-minus" class="cp-cielightness cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-cielightness cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-cielightness cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-cielightness cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.cie] +=
               '<div class="cp-slider cp-cielightness cp-transparency">' +
@@ -421,8 +420,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.cie] +=
-                '<div id="mm-minus" class="cp-ciechroma cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-ciechroma cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-ciechroma cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-ciechroma cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.cie] +=
               '<div class="cp-slider cp-ciechroma cp-transparency">' +
@@ -432,8 +431,8 @@
 
             if (settings.slidersplusminus) {
               sliders[settings.order.cie] +=
-                '<div id="mm-minus" class="cp-ciehue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
-                '<div id="mm-plus" class="cp-ciehue cp-sliderbutton cp-sliderbutton-plus">+</div>';
+                '<div class="cp-ciehue cp-sliderbutton cp-sliderbutton-minus">-</div>' +
+                '<div class="cp-ciehue cp-sliderbutton cp-sliderbutton-plus">+</div>';
             }
             sliders[settings.order.cie] +=
               '<div class="cp-slider cp-ciehue cp-transparency">' +
@@ -450,7 +449,7 @@
         }
 
         if (settings.grouping) {
-          if (!!settings.hsvpanel + !!(settings.sliders && sliders.length > 0) + !!settings.swatches > 1) {
+          if (settings.hsvpanel + (settings.sliders && sliders.length > 0) + !!settings.swatches > 1) {
             color_picker_html += '<ul class="cp-pills">';
           }
           else {
@@ -709,46 +708,46 @@
             return value;
           }
 
-          var mm_add;
+          var increment;
           if ($(ev.target).hasClass('cp-sliderbutton-plus')) {
-            mm_add = 1;
+            increment = 1;
           }
           else if ($(ev.target).hasClass('cp-sliderbutton-minus')) {
-            mm_add = -1;
+            increment = -1;
           }
           else {
-            mm_add = 0;
+            increment = 0;
           }
 
           if ($(ev.target).hasClass('cp-opacity')) {
-            _updateColorsProperty('hsla', 'a', min_max((color.hsla.a + mm_add/100), 0, 1) );
+            _updateColorsProperty('hsla', 'a', min_max((color.hsla.a + increment/100), 0, 1) );
           }
           if ($(ev.target).hasClass('cp-hslhue')) {
-            _updateColorsProperty('hsla', 'h', min_max((color.hsla.h + mm_add), 0, 360) );
+            _updateColorsProperty('hsla', 'h', min_max((color.hsla.h + increment), 0, 360) );
           }
           if ($(ev.target).hasClass('cp-hslsaturation')) {
-            _updateColorsProperty('hsla', 's', min_max((color.hsla.s + mm_add/100), 0, 1) );
+            _updateColorsProperty('hsla', 's', min_max((color.hsla.s + increment/100), 0, 1) );
           }
           if ($(ev.target).hasClass('cp-hsllightness')) {
-            _updateColorsProperty('hsla', 'l', min_max((color.hsla.l + mm_add/100), 0, 1) );
+            _updateColorsProperty('hsla', 'l', min_max((color.hsla.l + increment/100), 0, 1) );
           }
           if ($(ev.target).hasClass('cp-rgbred')) {
-            _updateColorsProperty('rgba', 'r', min_max((color.rgba.r + mm_add), 0, 255) );
+            _updateColorsProperty('rgba', 'r', min_max((color.rgba.r + increment), 0, 255) );
           }
           if ($(ev.target).hasClass('cp-rgbgreen')) {
-            _updateColorsProperty('rgba', 'g', min_max((color.rgba.g + mm_add), 0, 255) );
+            _updateColorsProperty('rgba', 'g', min_max((color.rgba.g + increment), 0, 255) );
           }
           if ($(ev.target).hasClass('cp-rgbblue')) {
-            _updateColorsProperty('rgba', 'b', min_max((color.rgba.b + mm_add), 0, 255) );
+            _updateColorsProperty('rgba', 'b', min_max((color.rgba.b + increment), 0, 255) );
           }
           if ($(ev.target).hasClass('cp-cielightness')) {
-            _updateColorsProperty('cielch', 'l', min_max((color.cielch.l + mm_add), 0, MAXLIGHT) );
+            _updateColorsProperty('cielch', 'l', min_max((color.cielch.l + increment), 0, MAXLIGHT) );
           }
           if ($(ev.target).hasClass('cp-ciechroma')) {
-            _updateColorsProperty('cielch', 'c', min_max((color.cielch.c + mm_add), 0, MAXVALIDCHROMA) );
+            _updateColorsProperty('cielch', 'c', min_max((color.cielch.c + increment), 0, MAXVALIDCHROMA) );
           }
           if ($(ev.target).hasClass('cp-ciehue')) {
-            _updateColorsProperty('cielch', 'h', min_max((color.cielch.h + mm_add), 0, 360) );
+            _updateColorsProperty('cielch', 'h', min_max((color.cielch.h + increment), 0, 360) );
           }
 
           _updateAllElements();
@@ -1028,8 +1027,10 @@
       }
 
       function getConfig(name) {
+        var r;
+
         try {
-          var r = JSON.parse(localStorage.getItem('cp-userdata-' + name));
+          r = JSON.parse(localStorage.getItem('cp-userdata-' + name));
 
           return r;
         }
@@ -1989,8 +1990,8 @@
 
   /* source: http://phpjs.org/functions/base64_encode/ */
   $.fn.ColorPickerSliders.base64encode = function(data) {
-    var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-    var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+    var b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+        o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
         ac = 0,
         enc = '',
         tmp_arr = [];

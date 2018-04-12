@@ -11,8 +11,6 @@
     <meta itemprop="description" content="Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.">
     <meta itemprop="image" content="http://www.virtuosoft.eu/resources/bootstrap-colorpickersliders.png">
 
-    <link rel="shortcut icon" href="libraries/favicon.ico">
-
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="demo.css" rel="stylesheet" type="text/css" media="all">
@@ -140,7 +138,7 @@
 
       <div class="row">
         <div class="col-md-4">
-          <form class="form-vertical" role="form" id="size">
+          <form class="form-vertical" role="form" id="size2">
             <div class="form-group">
               <label for="small" class="control-label">Small sized HSL</label>
               <input type="text" class="form-control" id="small" value="#adff2f">
@@ -364,51 +362,31 @@
         </div>
       </div>
 
-      <h3>More sliders options</h3>
-
-      <blockquote>
-        <p><small>
-          I was working on a project where I needed a color picker. I found bootstrap-colorpickersliders and it was great.
-          But after using it for some time, I wished I could know exact values for each color parameter and to be able to fine tune them.
-        </small></p>
-        <footer><a href="https://github.com/mircmm">mircmm</a></footer>
-      </blockquote>
+      <h3>Slier values and precise control</h3>
 
       <div class="row">
         <div class="col-md-6">
           <p>
-            Click below, to see the result of my programming.
+            All the slider values will be visible when <code>rendervalues</code> is set to <code>true</code>.<br>
+            The values can be precisely controlled via buttons if <code>slidersplusminus</code> is set to <code>true</code>.
           </p>
           <form class="form-vertical" role="form" id="size">
             <div class="form-group">
-              <input type="text" class="form-control" id="mm-sliders-popup" value="#336699" data-color-format="hex">
+              <input type="text" class="form-control" id="sliders-plusminus" value="#336699" data-color-format="hex">
             </div>
           </form>
-          <p>
-            <code>rendervalues: true</code>
-            Display currently selected value in each slider.
-          </p>
-          <p>
-            <code>slidersplusminus: true</code>
-            Display -1 and +1 buttons left and right of each slider.
-          </p>
-          <p>
-            <code>previewformat: &#39;hsl-rgb&#39;</code>
-            Display HSL and RGB value in preview field.
-            WARNING: It might be too wide, use at your own risk!
-          </p>
         </div>
 
         <div class="col-md-6">
           <pre class="prettyprint">
 &lt;script&gt;
-  $(&quot;#mm-sliders-popup&quot;).ColorPickerSliders({
+  $(&quot;#sliders-plusminus&quot;).ColorPickerSliders({
     placement: &#39;bottom&#39;,
     size: &#39;lg&#39;,
     previewformat: &#39;hsl-rgb&#39;,
     swatches: false,
     sliders: true,
-    title: &#39;sliders demo by mircmm&#39;,
+    title: &#39;Values and plus/minus buttons&#39;,
     order: {
       preview: 1,
       hsl: 2,
@@ -423,13 +401,13 @@
           </pre>
 
           <script>
-            $("#mm-sliders-popup").ColorPickerSliders({
+            $("#sliders-plusminus").ColorPickerSliders({
               placement: 'bottom',
               size: 'lg',
               previewformat: 'hsl-rgb',
               swatches: false,
               sliders: true,
-              title: 'sliders demo by mircmm',
+              title: 'Values and plus/minus buttons',
               order: {
                 preview: 1,
                 hsl: 2,
@@ -462,13 +440,13 @@
             <td><code>size</code></td>
             <td><code>'sm'</code>: Small sized popover.<br>
               <code><strong>'default'</strong></code>: Default popover size.<br>
-              <!-- mircmm: corrected error, changed large to lg -->
               <code>'lg'</code>: Large popover.</td>
           </tr>
           <tr>
             <td><code>placement</code></td>
-            <td>Popover placement direction. Can be <code><strong>'auto'</strong></code> | <code>'top'</code> | <code>'left'</code> | <code>'bottom'</code> | <code>'right'</code></code>.<br>
-              When <code>'auto'</code> is specified, it will dynamically reorient the popover. For example, if placement is <code>'auto left'</code>, the tooltip will display to the left when possible, otherwise it will display right.</tr>
+            <td>Popover placement direction. Can be <code><strong>'auto'</strong></code> | <code>'top'</code> | <code>'left'</code> | <code>'bottom'</code> | <code>'right'</code>.<br>
+              When <code>'auto'</code> is specified, it will dynamically reorient the popover. For example, if placement is <code>'auto left'</code>, the tooltip will display to the left when possible, otherwise it will display right.</td>
+          </tr>
           <tr>
             <td><code>preventtouchkeyboardonshow</code></td>
             <td><code><strong>true</strong></code>: Makes the input readonly to prevent touch keyboard to show up on focus, needs a second click to become editable.</td>
