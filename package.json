@@ -8,6 +8,7 @@
   },
   "license": "Apache-2.0",
   "main": "dist/bootstrap.colorpickersliders.js",
+  "style": "dist/bootstrap.colorpickersliders.css",
   "contributors": [
   ],
   "repository": {
@@ -15,7 +16,7 @@
     "url": "https://github.com/istvan-ujjmeszaros/bootstrap-colorpickersliders.git"
   },
   "homepage": "https://www.virtuosoft.eu/code/bootstrap-colorpickersliders/",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "devDependencies": {
     "grunt": "^1.0.2",
     "grunt-cli": "^1.2.0",

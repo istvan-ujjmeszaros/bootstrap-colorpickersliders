@@ -1,5 +1,5 @@
 /*
- *  Bootstrap Color Picker Sliders - v3.1.0
+ *  Bootstrap Color Picker Sliders - v3.1.1
  *
  *  Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.
  *  http://www.virtuosoft.eu/code/bootstrap-colorpickersliders/
@@ -12,7 +12,26 @@
  *
  *  Using color math algorithms from EasyRGB Web site:/
  *      http://www.easyrgb.com/index.php?X=MATH */
-(function($) {
+(function(factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = function(root, jQuery) {
+      if (jQuery === undefined) {
+        if (typeof window !== 'undefined') {
+          jQuery = require('jquery');
+        }
+        else {
+          jQuery = require('jquery')(root);
+        }
+      }
+      factory(jQuery);
+      return jQuery;
+    };
+  } else {
+    factory(jQuery);
+  }
+}(function($) {
   'use strict';
 
   $.fn.ColorPickerSliders = function(options) {
@@ -2395,4 +2414,4 @@
     return !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
   };
 
-})(jQuery);
+}));
