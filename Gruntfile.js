@@ -31,10 +31,6 @@ module.exports = function (grunt) {
         src: ["src/bootstrap.colorpickersliders.js"],
         dest: "dist/bootstrap.colorpickersliders.js"
       },
-      js2: {
-        src: ["src/bootstrap.colorpickersliders.nocielch.js"],
-        dest: "dist/bootstrap.colorpickersliders.nocielch.js"
-      },
       css: {
         src: ["src/bootstrap.colorpickersliders.css"],
         dest: "dist/bootstrap.colorpickersliders.css"
@@ -46,7 +42,7 @@ module.exports = function (grunt) {
 
     // Lint definitions
     jshint: {
-      files: ["src/bootstrap.colorpickersliders.js", "src/bootstrap.colorpickersliders.nocielch.js"],
+      files: ["src/bootstrap.colorpickersliders.js"],
       options: {
         jshintrc: ".jshintrc"
       }
@@ -57,10 +53,6 @@ module.exports = function (grunt) {
       js: {
         src: ["dist/bootstrap.colorpickersliders.js"],
         dest: "dist/bootstrap.colorpickersliders.min.js"
-      },
-      js2: {
-        src: ["dist/bootstrap.colorpickersliders.nocielch.js"],
-        dest: "dist/bootstrap.colorpickersliders.nocielch.min.js"
       },
       options: {
         banner: "<%= meta.banner %>"

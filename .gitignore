@@ -8,3 +8,5 @@ nbproject
 *.iws
 node_modules
 bower_components
+.project
+

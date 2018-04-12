@@ -11,8 +11,6 @@
     <meta itemprop="description" content="Bootstrap 3 optimized responsive color selector with HSV, HSL, RGB and CIE-Lch (which supports human perceived lightness) selectors and color swatches.">
     <meta itemprop="image" content="http://www.virtuosoft.eu/resources/bootstrap-colorpickersliders.png">
 
-    <link rel="shortcut icon" href="libraries/favicon.ico">
-
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="demo.css" rel="stylesheet" type="text/css" media="all">
@@ -140,7 +138,7 @@
 
       <div class="row">
         <div class="col-md-4">
-          <form class="form-vertical" role="form" id="size">
+          <form class="form-vertical" role="form" id="size2">
             <div class="form-group">
               <label for="small" class="control-label">Small sized HSL</label>
               <input type="text" class="form-control" id="small" value="#adff2f">
@@ -353,11 +351,72 @@
     });
 &lt;/script&gt;
           </pre>
-          <code>invalidcolorsopacity</code> hiddens the colors from the CIE sliders whose can not be converted to RGB without lowering their chroma values. It is good for creating color schemas.
+          <code>invalidcolorsopacity</code> hides the colors from the CIE sliders whose can not be converted to RGB without lowering their chroma values. It is good for creating color schemas.
           <script>
             $("#flat").ColorPickerSliders({
               flat: true,
               invalidcolorsopacity: 0
+            });
+          </script>
+
+        </div>
+      </div>
+
+      <h3>Slier values and precise control</h3>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            All the slider values will be visible when <code>rendervalues</code> is set to <code>true</code>.<br>
+            The values can be precisely controlled via buttons if <code>slidersplusminus</code> is set to <code>true</code>.
+          </p>
+          <form class="form-vertical" role="form" id="size">
+            <div class="form-group">
+              <input type="text" class="form-control" id="sliders-plusminus" value="#336699" data-color-format="hex">
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <pre class="prettyprint">
+&lt;script&gt;
+  $(&quot;#sliders-plusminus&quot;).ColorPickerSliders({
+    placement: &#39;bottom&#39;,
+    size: &#39;lg&#39;,
+    previewformat: &#39;hsl-rgb&#39;,
+    swatches: false,
+    sliders: true,
+    title: &#39;Values and plus/minus buttons&#39;,
+    order: {
+      preview: 1,
+      hsl: 2,
+      opacity: 3,
+      rgb: 4,
+      cie: 5
+      },
+    rendervalues: true,
+    slidersplusminus: true
+  });
+&lt;/script&gt;
+          </pre>
+
+          <script>
+            $("#sliders-plusminus").ColorPickerSliders({
+              placement: 'bottom',
+              size: 'lg',
+              previewformat: 'hsl-rgb',
+              swatches: false,
+              sliders: true,
+              title: 'Values and plus/minus buttons',
+              order: {
+                preview: 1,
+                hsl: 2,
+                opacity: 3,
+                rgb: 4,
+                cie: 5
+              },
+            rendervalues: true,
+            slidersplusminus: true
             });
           </script>
 
@@ -381,12 +440,13 @@
             <td><code>size</code></td>
             <td><code>'sm'</code>: Small sized popover.<br>
               <code><strong>'default'</strong></code>: Default popover size.<br>
-              <code>'large'</code>: Large popover.</td>
+              <code>'lg'</code>: Large popover.</td>
           </tr>
           <tr>
             <td><code>placement</code></td>
-            <td>Popover placement direction. Can be <code><strong>'auto'</strong></code> | <code>'top'</code> | <code>'left'</code> | <code>'bottom'</code> | <code>'right'</code></code>.<br>
-              When <code>'auto'</code> is specified, it will dynamically reorient the popover. For example, if placement is <code>'auto left'</code>, the tooltip will display to the left when possible, otherwise it will display right.</tr>
+            <td>Popover placement direction. Can be <code><strong>'auto'</strong></code> | <code>'top'</code> | <code>'left'</code> | <code>'bottom'</code> | <code>'right'</code>.<br>
+              When <code>'auto'</code> is specified, it will dynamically reorient the popover. For example, if placement is <code>'auto left'</code>, the tooltip will display to the left when possible, otherwise it will display right.</td>
+          </tr>
           <tr>
             <td><code>preventtouchkeyboardonshow</code></td>
             <td><code><strong>true</strong></code>: Makes the input readonly to prevent touch keyboard to show up on focus, needs a second click to become editable.</td>
@@ -419,7 +479,10 @@
           </tr>
           <tr>
             <td><code>previewformat</code></td>
-            <td>This is the color format on the preview slider (if visible). Can be <strong><code>rgb</code></strong>, <code>hsl</code> or <code>hex</code>. Note that hex format can not represent the opacity value.</td>
+            <td>This is the color format on the preview slider (if visible). Can be <strong><code>rgb</code></strong>,
+              <code>hsl</code>, <code>hex</code> or <code>hsl-rgb</code>.
+              Note that hex format can not represent the opacity value.
+              Warning: hsl-rgb can be too wide for preview field.</td>
           </tr>
           <tr>
             <td><code>swatches</code></td>
@@ -483,6 +546,17 @@
           <tr>
             <td><code>titleswatchesreset</code></td>
             <td><code>string</code>: Title of the reset swatches button.</td>
+          </tr>
+          <tr>
+            <td><code>rendervalues</code></td>
+            <td><code>true</code>: Display currently selected value in each slider.<br>
+              <code><strong>false</strong></code>: Just show default normal sliders.</td>
+          </tr>
+          <tr>
+            <td><code>slidersplusminus</code></td>
+            <td><code>true</code>: Display -1 and +1 buttons left and right of each slider.
+              Clicking on them decreases or increases slider value by 1.<br>
+              <code><strong>false</strong></code>: Just show default normal sliders.</td>
           </tr>
         </tbody>
       </table>
