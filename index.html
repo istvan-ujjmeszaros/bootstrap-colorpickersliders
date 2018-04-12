@@ -353,11 +353,92 @@
     });
 &lt;/script&gt;
           </pre>
-          <code>invalidcolorsopacity</code> hiddens the colors from the CIE sliders whose can not be converted to RGB without lowering their chroma values. It is good for creating color schemas.
+          <code>invalidcolorsopacity</code> hides the colors from the CIE sliders whose can not be converted to RGB without lowering their chroma values. It is good for creating color schemas.
           <script>
             $("#flat").ColorPickerSliders({
               flat: true,
               invalidcolorsopacity: 0
+            });
+          </script>
+
+        </div>
+      </div>
+
+      <h3>More sliders options</h3>
+
+      <blockquote>
+        <p><small>
+          I was working on a project where I needed a color picker. I found bootstrap-colorpickersliders and it was great.
+          But after using it for some time, I wished I could know exact values for each color parameter and to be able to fine tune them.
+        </small></p>
+        <footer><a href="https://github.com/mircmm">mircmm</a></footer>
+      </blockquote>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            Click below, to see the result of my programming.
+          </p>
+          <form class="form-vertical" role="form" id="size">
+            <div class="form-group">
+              <input type="text" class="form-control" id="mm-sliders-popup" value="#336699" data-color-format="hex">
+            </div>
+          </form>
+          <p>
+            <code>rendervalues: true</code>
+            Display currently selected value in each slider.
+          </p>
+          <p>
+            <code>slidersplusminus: true</code>
+            Display -1 and +1 buttons left and right of each slider.
+          </p>
+          <p>
+            <code>previewformat: &#39;hsl-rgb&#39;</code>
+            Display HSL and RGB value in preview field.
+            WARNING: It might be too wide, use at your own risk!
+          </p>
+        </div>
+
+        <div class="col-md-6">
+          <pre class="prettyprint">
+&lt;script&gt;
+  $(&quot;#mm-sliders-popup&quot;).ColorPickerSliders({
+    placement: &#39;bottom&#39;,
+    size: &#39;lg&#39;,
+    previewformat: &#39;hsl-rgb&#39;,
+    swatches: false,
+    sliders: true,
+    title: &#39;sliders demo by mircmm&#39;,
+    order: {
+      preview: 1,
+      hsl: 2,
+      opacity: 3,
+      rgb: 4,
+      cie: 5
+      },
+    rendervalues: true,
+    slidersplusminus: true
+  });
+&lt;/script&gt;
+          </pre>
+
+          <script>
+            $("#mm-sliders-popup").ColorPickerSliders({
+              placement: 'bottom',
+              size: 'lg',
+              previewformat: 'hsl-rgb',
+              swatches: false,
+              sliders: true,
+              title: 'sliders demo by mircmm',
+              order: {
+                preview: 1,
+                hsl: 2,
+                opacity: 3,
+                rgb: 4,
+                cie: 5
+              },
+            rendervalues: true,
+            slidersplusminus: true
             });
           </script>
 
@@ -381,7 +462,8 @@
             <td><code>size</code></td>
             <td><code>'sm'</code>: Small sized popover.<br>
               <code><strong>'default'</strong></code>: Default popover size.<br>
-              <code>'large'</code>: Large popover.</td>
+              <!-- mircmm: corrected error, changed large to lg -->
+              <code>'lg'</code>: Large popover.</td>
           </tr>
           <tr>
             <td><code>placement</code></td>
@@ -419,7 +501,10 @@
           </tr>
           <tr>
             <td><code>previewformat</code></td>
-            <td>This is the color format on the preview slider (if visible). Can be <strong><code>rgb</code></strong>, <code>hsl</code> or <code>hex</code>. Note that hex format can not represent the opacity value.</td>
+            <td>This is the color format on the preview slider (if visible). Can be <strong><code>rgb</code></strong>,
+              <code>hsl</code>, <code>hex</code> or <code>hsl-rgb</code>.
+              Note that hex format can not represent the opacity value.
+              Warning: hsl-rgb can be too wide for preview field.</td>
           </tr>
           <tr>
             <td><code>swatches</code></td>
@@ -483,6 +568,17 @@
           <tr>
             <td><code>titleswatchesreset</code></td>
             <td><code>string</code>: Title of the reset swatches button.</td>
+          </tr>
+          <tr>
+            <td><code>rendervalues</code></td>
+            <td><code>true</code>: Display currently selected value in each slider.<br>
+              <code><strong>false</strong></code>: Just show default normal sliders.</td>
+          </tr>
+          <tr>
+            <td><code>slidersplusminus</code></td>
+            <td><code>true</code>: Display -1 and +1 buttons left and right of each slider.
+              Clicking on them decreases or increases slider value by 1.<br>
+              <code><strong>false</strong></code>: Just show default normal sliders.</td>
           </tr>
         </tbody>
       </table>
