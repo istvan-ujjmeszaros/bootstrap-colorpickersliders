@@ -84,7 +84,7 @@
           sliders: true,
           grouping: true,
           swatches: ['FFFFFF', 'C0C0C0', '808080', '000000', 'FF0000', '800000', 'FFFF00', '808000', '00FF00', '008000', '00FFFF', '008080', '0000FF', '000080', 'FF00FF', '800080'], // array or false to disable swatches
-          customswatches: 'colorpickkersliders', // false or a grop name
+          customswatches: 'colorpickkersliders', // false or a group name
           connectedinput: false, // can be a jquery object or a selector
           flat: false,
           updateinterval: 30, // update interval of the sliders while in drag (ms)
