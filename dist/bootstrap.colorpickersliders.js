@@ -324,7 +324,7 @@
         popover_container.remove();
         popover_container = null;
 
-        triggerelement.popover('destroy');
+        triggerelement.popover('dispose');
       }
 
       function _getControllerHtml() {
